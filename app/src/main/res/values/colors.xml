@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#393A3F</color>
+    <color name="colorPrimaryDark">#303135</color>
+    <color name="colorAccent">#19AC18</color>
+
+    <color name="btnNormal">#19AC18</color>
+    <color name="btnPressed">#169A15</color>
+
+    <color name="toolbar_menu_color">#FFFFFF</color>
+    <color name="toolbar_bg_color">#393A3F</color>
+    <color name="toolbar_title_color">#FFFFFF</color>
+
+    <color name="status_menu_color">#80373d4d</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="gray_line">#1A687189</color>
+    <color name="color_hint">#add4f3</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_table_top_bg">#33313037</color>
+
+    <color name="color_35394b">#35394b</color>
+    <color name="color_b1cecc">#b1cecc</color>
+    <color name="color_d7dae2">#d7dae2</color>
+    <color name="color_a3a8b6">#a3a8b6</color>
+    <color name="color_bec1cc">#bec1cc</color>
+
+    <color name="text_green">#67fd87</color>
+    <color name="text_yellow">#fffa6c</color>
+    <color name="text_red">#ff4873</color>
+    <color name="text_ff4739">#ff4739</color>
+    <color name="text_3bcfff">#3bcfff</color>
+</resources>

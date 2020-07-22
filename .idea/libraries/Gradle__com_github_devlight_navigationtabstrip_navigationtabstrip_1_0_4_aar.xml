@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/navigationtabstrip-1.0.4.aar/d15c88e7e0c362c6743e2f2f21b7c474/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/navigationtabstrip-1.0.4.aar/d15c88e7e0c362c6743e2f2f21b7c474/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.devlight.navigationtabstrip/navigationtabstrip/1.0.4/dd5bc3ab10f577218193a8093273d648d5660354/navigationtabstrip-1.0.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.devlight.navigationtabstrip/navigationtabstrip/1.0.4/5c720c4fcabc120a621207ab48420067242a8604/navigationtabstrip-1.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

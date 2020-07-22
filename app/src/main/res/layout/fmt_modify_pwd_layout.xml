@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ItemViewBase="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <com.minorfish.dtuapp.module.widget.ItemViewEt
+            android:id="@+id/item_old_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"
+            android:layout_margin="4dp"
+            ItemViewBase:showDrawable="true"
+            ItemViewBase:title="原始密码" />
+
+        <com.minorfish.dtuapp.module.widget.ItemViewEt
+            android:id="@+id/item_new_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"
+            android:layout_margin="4dp"
+            ItemViewBase:showDrawable="true"
+            ItemViewBase:title="新密码" />
+
+        <com.minorfish.dtuapp.module.widget.ItemViewEt
+            android:id="@+id/item_check_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"
+            android:layout_margin="4dp"
+            ItemViewBase:showDrawable="true"
+            ItemViewBase:title="重复密码" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_complete"
+        android:layout_width="160dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="完  成"
+        android:textColor="@android:color/white" />
+</LinearLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ItemViewBase="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_35394b"
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="25dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <com.minorfish.dtuapp.module.widget.ItemViewSpinner
+                    android:id="@+id/item_sensor_vendor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="true"
+                    ItemViewBase:title="生产厂家" />
+
+                <com.minorfish.dtuapp.module.widget.ItemViewSpinner
+                    android:id="@+id/item_sensor_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="true"
+                    ItemViewBase:title="监测站型号" />
+
+                <com.minorfish.dtuapp.module.widget.ItemViewEt
+                    android:id="@+id/item_sensor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="true"
+                    ItemViewBase:title="监测站名称" />
+
+                <com.minorfish.dtuapp.module.widget.ItemViewEt
+                    android:id="@+id/item_sensor_freq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="true"
+                    ItemViewBase:title="发送频率" />
+
+                <com.minorfish.dtuapp.module.widget.ItemViewSpinner
+                    android:id="@+id/item_sensor_port"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="true"
+                    ItemViewBase:title="串口号" />
+
+                <com.minorfish.dtuapp.module.widget.ItemViewSpinner
+                    android:id="@+id/item_sensor_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="true"
+                    ItemViewBase:title="监测类型" />
+
+                <com.minorfish.dtuapp.module.widget.ItemViewTv
+                    android:id="@+id/item_sensor_sub_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="true"
+                    ItemViewBase:title="监测值" />
+
+                <com.minorfish.dtuapp.module.widget.ItemViewEt
+                    android:id="@+id/item_sensor_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_margin="4dp"
+                    ItemViewBase:showDrawable="false"
+                    ItemViewBase:title="详细地址" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_complete"
+                    android:layout_width="120dp"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/btn_blue_selector"
+                    android:text="完成"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="120dp"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/btn_blue_selector"
+                    android:text="取消"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,908 @@
+[
+    {
+      "code": "320100",
+      "value": "南京市",
+      "children": [
+        {
+          "code": "320101",
+          "value": "市辖区",
+          "children": [
+            {
+              "code": "1",
+              "value": "南京市市辖区医院01",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320102",
+          "value": "玄武区",
+          "children": [
+            {
+              "code": "2",
+              "value": "南京市玄武区医院01",
+              "children": []
+            },
+            {
+              "code": "5",
+              "value": "南京市市辖区医院02",
+              "children": []
+            },
+            {
+              "code": "13",
+              "value": "江苏省卫监",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320103",
+          "value": "白下区",
+          "children": []
+        },
+        {
+          "code": "320104",
+          "value": "秦淮区",
+          "children": []
+        },
+        {
+          "code": "320105",
+          "value": "建邺区",
+          "children": [
+            {
+              "code": "8",
+              "value": "南京青奥城建设发展有限公司-",
+              "children": [
+                {
+                  "code": "26",
+                  "value": "游泳池",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "code": "14",
+              "value": "南京奥体中心经营管理有限公司",
+              "children": [
+                {
+                  "code": "37",
+                  "value": "儿童池",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "code": "15",
+              "value": "南京青奥城建设发展有限公司",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320106",
+          "value": "鼓楼区",
+          "children": []
+        },
+        {
+          "code": "320107",
+          "value": "下关区",
+          "children": []
+        },
+        {
+          "code": "320111",
+          "value": "浦口区",
+          "children": []
+        },
+        {
+          "code": "320113",
+          "value": "栖霞区",
+          "children": []
+        },
+        {
+          "code": "320114",
+          "value": "雨花台区",
+          "children": [
+            {
+              "code": "9",
+              "value": "南京海韵休闲洗浴有限公司-",
+              "children": [
+                {
+                  "code": "27",
+                  "value": "游泳池",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "code": "17",
+              "value": "南京海韵休闲洗浴有限公司",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320115",
+          "value": "江宁区",
+          "children": []
+        },
+        {
+          "code": "320116",
+          "value": "六合区",
+          "children": []
+        },
+        {
+          "code": "320124",
+          "value": "溧水县",
+          "children": []
+        },
+        {
+          "code": "320125",
+          "value": "高淳县",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320200",
+      "value": "无锡市",
+      "children": [
+        {
+          "code": "320201",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "320202",
+          "value": "崇安区",
+          "children": []
+        },
+        {
+          "code": "320203",
+          "value": "南长区",
+          "children": []
+        },
+        {
+          "code": "320204",
+          "value": "北塘区",
+          "children": []
+        },
+        {
+          "code": "320205",
+          "value": "锡山区",
+          "children": []
+        },
+        {
+          "code": "320206",
+          "value": "惠山区",
+          "children": []
+        },
+        {
+          "code": "320211",
+          "value": "滨湖区",
+          "children": []
+        },
+        {
+          "code": "320281",
+          "value": "江阴市",
+          "children": []
+        },
+        {
+          "code": "320282",
+          "value": "宜兴市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320300",
+      "value": "徐州市",
+      "children": [
+        {
+          "code": "320301",
+          "value": "市辖区",
+          "children": [
+            {
+              "code": "12",
+              "value": "徐州奥体中心经营管理有限公司-",
+              "children": [
+                {
+                  "code": "30",
+                  "value": "游泳池",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "code": "20",
+              "value": "徐州市奥体中心",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320302",
+          "value": "鼓楼区",
+          "children": []
+        },
+        {
+          "code": "320303",
+          "value": "云龙区",
+          "children": []
+        },
+        {
+          "code": "320304",
+          "value": "九里区",
+          "children": []
+        },
+        {
+          "code": "320305",
+          "value": "贾汪区",
+          "children": []
+        },
+        {
+          "code": "320311",
+          "value": "泉山区",
+          "children": []
+        },
+        {
+          "code": "320321",
+          "value": "丰　县",
+          "children": []
+        },
+        {
+          "code": "320322",
+          "value": "沛　县",
+          "children": []
+        },
+        {
+          "code": "320323",
+          "value": "铜山县",
+          "children": []
+        },
+        {
+          "code": "320324",
+          "value": "睢宁县",
+          "children": []
+        },
+        {
+          "code": "320381",
+          "value": "新沂市",
+          "children": []
+        },
+        {
+          "code": "320382",
+          "value": "邳州市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320400",
+      "value": "常州市",
+      "children": [
+        {
+          "code": "320401",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "320402",
+          "value": "天宁区",
+          "children": [
+            {
+              "code": "21",
+              "value": "常州市卫生监督所",
+              "children": []
+            },
+            {
+              "code": "23",
+              "value": "常州市彩虹城",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320404",
+          "value": "钟楼区",
+          "children": [
+            {
+              "code": "22",
+              "value": "常州市莱蒙时代",
+              "children": []
+            },
+            {
+              "code": "25",
+              "value": "常州市青枫公馆",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320405",
+          "value": "戚墅堰区",
+          "children": []
+        },
+        {
+          "code": "320411",
+          "value": "新北区",
+          "children": []
+        },
+        {
+          "code": "320412",
+          "value": "武进区",
+          "children": [
+            {
+              "code": "24",
+              "value": "常州市公园壹号",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320481",
+          "value": "溧阳市",
+          "children": []
+        },
+        {
+          "code": "320482",
+          "value": "金坛市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320500",
+      "value": "苏州市",
+      "children": [
+        {
+          "code": "320501",
+          "value": "市辖区",
+          "children": [
+            {
+              "code": "3",
+              "value": "苏州市市辖区医院01",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320502",
+          "value": "沧浪区",
+          "children": []
+        },
+        {
+          "code": "320503",
+          "value": "平江区",
+          "children": [
+            {
+              "code": "4",
+              "value": "苏州市平江区医院01",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320504",
+          "value": "金阊区",
+          "children": []
+        },
+        {
+          "code": "320505",
+          "value": "虎丘区",
+          "children": [
+            {
+              "code": "6",
+              "value": "苏州科技城医院",
+              "children": [
+                {
+                  "code": "10",
+                  "value": "儿科门诊候诊区",
+                  "children": [
+                    {
+                      "code": "28",
+                      "value": "水源地",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "code": "11",
+                  "value": "急诊候诊区",
+                  "children": [
+                    {
+                      "code": "29",
+                      "value": "游泳池",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "code": "12",
+                  "value": "医护DR操作区",
+                  "children": [
+                    {
+                      "code": "30",
+                      "value": "游泳池",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "code": "13",
+                  "value": "DR候诊区",
+                  "children": []
+                },
+                {
+                  "code": "15",
+                  "value": "患者CT候诊区",
+                  "children": []
+                },
+                {
+                  "code": "17",
+                  "value": "内科1候诊区",
+                  "children": []
+                },
+                {
+                  "code": "18",
+                  "value": "外科2候诊区",
+                  "children": []
+                },
+                {
+                  "code": "19",
+                  "value": "皮肤科候诊区",
+                  "children": []
+                },
+                {
+                  "code": "20",
+                  "value": "妇科候诊区",
+                  "children": []
+                },
+                {
+                  "code": "21",
+                  "value": "手术室候诊区",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "code": "320506",
+          "value": "吴中区",
+          "children": []
+        },
+        {
+          "code": "320507",
+          "value": "相城区",
+          "children": []
+        },
+        {
+          "code": "320581",
+          "value": "常熟市",
+          "children": []
+        },
+        {
+          "code": "320582",
+          "value": "张家港市",
+          "children": []
+        },
+        {
+          "code": "320583",
+          "value": "昆山市",
+          "children": []
+        },
+        {
+          "code": "320584",
+          "value": "吴江市",
+          "children": []
+        },
+        {
+          "code": "320585",
+          "value": "太仓市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320600",
+      "value": "南通市",
+      "children": [
+        {
+          "code": "320601",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "320602",
+          "value": "崇川区",
+          "children": []
+        },
+        {
+          "code": "320611",
+          "value": "港闸区",
+          "children": []
+        },
+        {
+          "code": "320621",
+          "value": "海安县",
+          "children": []
+        },
+        {
+          "code": "320623",
+          "value": "如东县",
+          "children": []
+        },
+        {
+          "code": "320681",
+          "value": "启东市",
+          "children": []
+        },
+        {
+          "code": "320682",
+          "value": "如皋市",
+          "children": []
+        },
+        {
+          "code": "320683",
+          "value": "通州市",
+          "children": []
+        },
+        {
+          "code": "320684",
+          "value": "海门市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320700",
+      "value": "连云港市",
+      "children": [
+        {
+          "code": "320701",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "320703",
+          "value": "连云区",
+          "children": []
+        },
+        {
+          "code": "320705",
+          "value": "新浦区",
+          "children": []
+        },
+        {
+          "code": "320706",
+          "value": "海州区",
+          "children": []
+        },
+        {
+          "code": "320721",
+          "value": "赣榆县",
+          "children": []
+        },
+        {
+          "code": "320722",
+          "value": "东海县",
+          "children": []
+        },
+        {
+          "code": "320723",
+          "value": "灌云县",
+          "children": []
+        },
+        {
+          "code": "320724",
+          "value": "灌南县",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320800",
+      "value": "淮安市",
+      "children": [
+        {
+          "code": "320801",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "320802",
+          "value": "清河区",
+          "children": []
+        },
+        {
+          "code": "320803",
+          "value": "楚州区",
+          "children": []
+        },
+        {
+          "code": "320804",
+          "value": "淮阴区",
+          "children": [
+            {
+              "code": "11",
+              "value": "泰州泳泰凤凰游泳健身中心-",
+              "children": [
+                {
+                  "code": "29",
+                  "value": "游泳池",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "code": "19",
+              "value": "淮安市淮沭河自来水有限公司",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "320811",
+          "value": "清浦区",
+          "children": []
+        },
+        {
+          "code": "320826",
+          "value": "涟水县",
+          "children": []
+        },
+        {
+          "code": "320829",
+          "value": "洪泽县",
+          "children": []
+        },
+        {
+          "code": "320830",
+          "value": "盱眙县",
+          "children": []
+        },
+        {
+          "code": "320831",
+          "value": "金湖县",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "320900",
+      "value": "盐城市",
+      "children": [
+        {
+          "code": "320901",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "320902",
+          "value": "亭湖区",
+          "children": []
+        },
+        {
+          "code": "320903",
+          "value": "盐都区",
+          "children": []
+        },
+        {
+          "code": "320921",
+          "value": "响水县",
+          "children": []
+        },
+        {
+          "code": "320922",
+          "value": "滨海县",
+          "children": []
+        },
+        {
+          "code": "320923",
+          "value": "阜宁县",
+          "children": []
+        },
+        {
+          "code": "320924",
+          "value": "射阳县",
+          "children": []
+        },
+        {
+          "code": "320925",
+          "value": "建湖县",
+          "children": []
+        },
+        {
+          "code": "320981",
+          "value": "东台市",
+          "children": []
+        },
+        {
+          "code": "320982",
+          "value": "大丰市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "321000",
+      "value": "扬州市",
+      "children": [
+        {
+          "code": "321001",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "321002",
+          "value": "广陵区",
+          "children": []
+        },
+        {
+          "code": "321003",
+          "value": "邗江区",
+          "children": []
+        },
+        {
+          "code": "321011",
+          "value": "郊　区",
+          "children": []
+        },
+        {
+          "code": "321023",
+          "value": "宝应县",
+          "children": []
+        },
+        {
+          "code": "321081",
+          "value": "仪征市",
+          "children": []
+        },
+        {
+          "code": "321084",
+          "value": "高邮市",
+          "children": []
+        },
+        {
+          "code": "321088",
+          "value": "江都市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "321100",
+      "value": "镇江市",
+      "children": [
+        {
+          "code": "321101",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "321102",
+          "value": "京口区",
+          "children": []
+        },
+        {
+          "code": "321111",
+          "value": "润州区",
+          "children": []
+        },
+        {
+          "code": "321112",
+          "value": "丹徒区",
+          "children": []
+        },
+        {
+          "code": "321181",
+          "value": "丹阳市",
+          "children": []
+        },
+        {
+          "code": "321182",
+          "value": "扬中市",
+          "children": []
+        },
+        {
+          "code": "321183",
+          "value": "句容市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "321200",
+      "value": "泰州市",
+      "children": [
+        {
+          "code": "321201",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "321202",
+          "value": "海陵区",
+          "children": [
+            {
+              "code": "10",
+              "value": "淮安市淮沭河自来水有限公司-",
+              "children": [
+                {
+                  "code": "28",
+                  "value": "水源地",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "code": "18",
+              "value": "泰州泳泰凤凰游泳健身中心",
+              "children": []
+            }
+          ]
+        },
+        {
+          "code": "321203",
+          "value": "高港区",
+          "children": []
+        },
+        {
+          "code": "321281",
+          "value": "兴化市",
+          "children": []
+        },
+        {
+          "code": "321282",
+          "value": "靖江市",
+          "children": []
+        },
+        {
+          "code": "321283",
+          "value": "泰兴市",
+          "children": []
+        },
+        {
+          "code": "321284",
+          "value": "姜堰市",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "321300",
+      "value": "宿迁市",
+      "children": [
+        {
+          "code": "321301",
+          "value": "市辖区",
+          "children": []
+        },
+        {
+          "code": "321302",
+          "value": "宿城区",
+          "children": []
+        },
+        {
+          "code": "321311",
+          "value": "宿豫区",
+          "children": []
+        },
+        {
+          "code": "321322",
+          "value": "沭阳县",
+          "children": []
+        },
+        {
+          "code": "321323",
+          "value": "泗阳县",
+          "children": []
+        },
+        {
+          "code": "321324",
+          "value": "泗洪县",
+          "children": []
+        }
+      ]
+    }
+  ]

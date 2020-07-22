@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="__picker_all_image">所有图片</string>
+    <string name="__picker_cancel">取消</string>
+    <string name="__picker_confirm_to_delete">确认删除？</string>
+    <string name="__picker_delete">删除</string>
+    <string name="__picker_deleted_a_photo">删除了一张图片</string>
+    <string name="__picker_done">完成</string>
+    <string name="__picker_done_with_count">完成(%1$d/%2$d)</string>
+    <string name="__picker_image_count">%1$d张</string>
+    <string name="__picker_image_index">%1$d/%2$d</string>
+    <string name="__picker_over_max_count_tips">你最多可以选择%1$d张图片</string>
+    <string name="__picker_title">图片</string>
+    <string name="__picker_undo">撤消</string>
+    <string name="__picker_yes">确定</string>
+    <string name="check_info_exit">取消</string>
+    <string name="check_info_message">未获得应用运行所需的基本权限，请在设置中开启权限后再使用</string>
+    <string name="check_info_setting">去设置</string>
+    <string name="check_info_title">权限提示</string>
+    <string name="ucrop_label_edit_photo">裁剪</string>
+    <string name="ucrop_label_original">原始比例</string>
+    <string name="ucrop_menu_crop">裁剪</string>
+</resources>

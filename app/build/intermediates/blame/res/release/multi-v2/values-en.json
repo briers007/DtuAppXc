@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\work\\Dtu\\DtuApp\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-en\\values-en.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\zsa\\.gradle\\caches\\transforms-1\\files-1.1\\permissionschecker-0.0.1-beta2.aar\\a1abd822fdca3a4444758be26d1ea66c\\res\\values-en\\values-en.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,106,261,316",
+                        "endColumns": "50,154,54,60",
+                        "endOffsets": "101,256,311,372"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zsa\\.gradle\\caches\\transforms-1\\files-1.1\\BaseRecyclerViewAdapterHelper-2.9.34.aar\\ccb5d4858bbaa326155ce3fc3fe41c0c\\res\\values-en\\values-en.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,105,162",
+                        "endColumns": "49,56,46",
+                        "endOffsets": "100,157,204"
+                    },
+                    "to": {
+                        "startLines": "6,7,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "377,427,484",
+                        "endColumns": "49,56,46",
+                        "endOffsets": "422,479,526"
+                    }
+                }
+            ]
+        }
+    ]
+}

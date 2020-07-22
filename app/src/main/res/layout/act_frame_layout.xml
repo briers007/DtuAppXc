@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_frame"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="@color/status_menu_color">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_status_light"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_logo" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="数采仪编号：HG-5641"
+                    android:textColor="@color/light_black_ab" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="检测因子：5"
+                    android:textColor="@color/light_black_ab" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="25dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="软件版本：v1.0"
+                    android:textColor="@color/light_black_ab" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="状态：正常"
+                    android:textColor="@color/light_black_ab" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@color/status_menu_color"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checkedButton="@id/rb_real_data"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_real_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/rb_real_data_selector"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="0sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#20000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#10FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/rb_history_selector"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="0sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#20000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#10FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_dtu_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/rb_dtu_setting_selector"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="0sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#20000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#10FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_sensor_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/rb_sensor_setting_selector"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="0sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#20000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#10FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_log"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/rb_log_selector"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="0sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#20000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#10FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/rb_modify_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/rb_modify_pwd_selector"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textSize="0sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#20000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#10FFFFFF" />
+            </RadioGroup>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

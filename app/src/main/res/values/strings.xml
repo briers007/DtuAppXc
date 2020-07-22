@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">DTUApp</string>
+
+    <string name="text_login">登录</string>
+    <string name="hint_username">请输入您的用户名</string>
+    <string name="hint_password">请输入您的密码</string>
+    <string name="hint_verify">验证码</string>
+
+    <string name="history_ph">酸碱度</string>
+    <string name="history_zhuodo">浊度</string>
+    <string name="history_temperature">温度</string>
+    <string name="history_yulv">余氯</string>
+
+    <string name="register_hint_password_new">请输入新密码</string>
+    <string name="register_hint_password_old">请输入旧密码</string>
+    <string name="register_hint_password_again">请再次输入密码</string>
+    <string name="register_hint_password_new_again">请再次确认新密码</string>
+    <string name="register_password_format">密码长度至少6个字符</string>
+    <string name="edit_password_hint">请输入密码</string>
+    <string name="edit_password_cfm_hint">请再次输入密码</string>
+    <string name="wrong_confirm_password">两次密码输入不一致。</string>
+</resources>

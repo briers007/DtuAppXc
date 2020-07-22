@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/bg_frame"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="160dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="200dp"
+        android:background="@drawable/bg_et"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="30dp"
+            android:src="@drawable/login_ic_username"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/white"/>
+
+        <EditText
+            android:id="@+id/login_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:textColor="@color/white"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"
+            android:hint="@string/hint_username"
+            android:src="@drawable/ic_launcher_background"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_et"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="30dp"
+            android:src="@drawable/login_ic_pwd"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/white"/>
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:textColor="@color/white"
+            android:textColorHint="@color/color_hint"
+            android:textSize="14sp"
+            android:hint="@string/hint_password"
+            android:src="@drawable/ic_launcher_background"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="160dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="登    录"
+        android:textColor="@android:color/white" />
+</LinearLayout>

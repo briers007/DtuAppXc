@@ -1,0 +1,166 @@
+[
+    {
+      "code": "100",
+      "value": "环境",
+      "children": [
+        {
+          "code": "101",
+          "value": "温度",
+          "children": []
+        },
+        {
+          "code": "102",
+          "value": "湿度",
+          "children": []
+        },
+        {
+          "code": "103",
+          "value": "PM2.5",
+          "children": []
+        },
+        {
+          "code": "104",
+          "value": "二氧化碳",
+          "children": []
+        },
+        {
+          "code": "105",
+          "value": "甲醛",
+          "children": []
+        },
+        {
+          "code": "106",
+          "value": "挥发性有机化合物",
+          "children": []
+        },
+        {
+          "code": "107",
+          "value": "氧气",
+          "children": []
+        },
+        {
+          "code": "108",
+          "value": "PM10",
+          "children": []
+        },
+        {
+          "code": "109",
+          "value": "光照",
+          "children": []
+        },
+        {
+          "code": "110",
+          "value": "噪声",
+          "children": []
+        },
+        {
+          "code": "111",
+          "value": "风速",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "200",
+      "value": "放射",
+      "children": [
+        {
+          "code": "201",
+          "value": "α射线",
+          "children": []
+        },
+        {
+          "code": "202",
+          "value": "β射线",
+          "children": []
+        },
+        {
+          "code": "203",
+          "value": "γ射线",
+          "children": []
+        },
+        {
+          "code": "204",
+          "value": "x射线",
+          "children": []
+        },
+        {
+          "code": "299",
+          "value": "环境放射",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "600",
+      "value": "泳池水",
+      "children": [
+        {
+          "code": "601",
+          "value": "温度",
+          "children": []
+        },
+        {
+          "code": "602",
+          "value": "余氯",
+          "children": []
+        },
+        {
+          "code": "603",
+          "value": "浊度",
+          "children": []
+        },
+        {
+          "code": "604",
+          "value": "pH",
+          "children": []
+        },
+        {
+          "code": "605",
+          "value": "尿素",
+          "children": []
+        }
+      ]
+    },
+    {
+      "code": "700",
+      "value": "水质",
+      "children": [
+        {
+          "code": "701",
+          "value": "温度",
+          "children": []
+        },
+        {
+          "code": "702",
+          "value": "余氯",
+          "children": []
+        },
+        {
+          "code": "703",
+          "value": "浊度",
+          "children": []
+        },
+        {
+          "code": "704",
+          "value": "pH",
+          "children": []
+        },
+        {
+          "code": "705",
+          "value": "总有机碳",
+          "children": []
+        },
+        {
+          "code": "706",
+          "value": "电导率",
+          "children": []
+        },
+        {
+          "code": "707",
+          "value": "耗氧量",
+          "children": []
+        }
+      ]
+    }
+  ]

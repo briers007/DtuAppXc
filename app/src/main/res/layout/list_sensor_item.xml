@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="104dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/list_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="94dp"
+        android:background="@drawable/table_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="0.5dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/list_sensor_name"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="@drawable/table_bg_up"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/color_d7dae2"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_line"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/table_bg_down"
+            android:orientation="vertical" >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="34dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/list_sensor_made"
+                    android:layout_width="wrap_content"
+                    android:minWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textColor="@color/color_d7dae2"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/list_sensor_port"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/color_d7dae2"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="34dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/list_sensor_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="200dp"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/color_d7dae2"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/list_sensor_type_sub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/color_d7dae2"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/list_add_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="88dp"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/btn_add_sensor"/>
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/real_new_item"
+    android:layout_width="match_parent"
+    android:layout_height="188dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/table_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@drawable/table_bg_up"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/color_a3a8b6" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dip"
+            android:layout_height="0dip"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/color_a3a8b6" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/table_bg_down">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="酸碱度"
+                android:textSize="17sp"
+                android:textColor="@color/color_d7dae2" />
+
+            <TextView
+                android:id="@+id/tv_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/text_green"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="正常"
+                android:textColor="@color/text_green" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

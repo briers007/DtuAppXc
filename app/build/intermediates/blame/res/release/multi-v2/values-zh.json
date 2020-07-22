@@ -1,0 +1,53 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\work\\Dtu\\DtuApp\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-zh\\values-zh.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\zsa\\.gradle\\caches\\transforms-1\\files-1.1\\permissionschecker-0.0.1-beta2.aar\\a1abd822fdca3a4444758be26d1ea66c\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,102,178,229",
+                        "endColumns": "46,75,50,49",
+                        "endOffsets": "97,173,224,274"
+                    },
+                    "to": {
+                        "startLines": "15,16,17,18",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "756,803,879,930",
+                        "endColumns": "46,75,50,49",
+                        "endOffsets": "798,874,925,975"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zsa\\.gradle\\caches\\transforms-1\\files-1.1\\ucrop-2.2.1-native.aar\\c4a0e890dd208313166724c5ce3fa267\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,109,163",
+                        "endColumns": "53,53,46",
+                        "endOffsets": "104,158,205"
+                    },
+                    "to": {
+                        "startLines": "19,20,21",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "980,1034,1088",
+                        "endColumns": "53,53,46",
+                        "endOffsets": "1029,1083,1130"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\zsa\\.gradle\\caches\\transforms-1\\files-1.1\\PhotoPicker-0.9.12.aar\\8375d8e3886b0d18ffd90fb3adfa10a2\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,107,154,215,262,323,368,435,490,549,621,667,712",
+                        "endColumns": "51,46,60,46,60,44,66,54,58,71,45,44,43",
+                        "endOffsets": "102,149,210,257,318,363,430,485,544,616,662,707,751"
+                    }
+                }
+            ]
+        }
+    ]
+}

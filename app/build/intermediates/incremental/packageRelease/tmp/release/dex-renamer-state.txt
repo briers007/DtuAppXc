@@ -1,0 +1,4 @@
+#Thu Jun 18 16:18:34 CST 2020
+base.0=E\:\\work\\Dtu\\DtuApp\\app\\build\\intermediates\\transforms\\dexMerger\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex

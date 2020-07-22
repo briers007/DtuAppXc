@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.minorfish.dtuapp">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <application
+        android:name=".abs.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.minorfish.dtuapp.module.ActSignIn"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTranslucentFullScreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.minorfish.dtuapp.module.ActFrame"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTranslucentFullScreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <activity
+            android:name="com.minorfish.dtuapp.module.ActFrame2"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTranslucentFullScreenTheme2"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+
+        <activity
+            android:name="com.minorfish.dtuapp.module.ActFrame2yuanganFive"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTranslucentFullScreenTheme2"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <!--<activity
+            android:name="com.minorfish.dtuapp.module.ActFrameSingle"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTranslucentFullScreenTheme2"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>-->
+
+
+        <activity
+            android:name="com.minorfish.dtuapp.module.ActSensorSetting"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTranslucentFullScreenTheme2"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+
+        <service
+            android:name=".usb.UsbService"
+            android:enabled="true" />
+        <service android:name=".mqtt.MqttPushDataService" />
+
+        <meta-data android:value="5b73f7a08f4a9d5a0f00012c" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="dtu" android:name="UMENG_CHANNEL"/>
+    </application>
+
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
+</manifest>
