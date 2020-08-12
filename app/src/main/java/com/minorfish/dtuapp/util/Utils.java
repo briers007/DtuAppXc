@@ -313,6 +313,7 @@ public class Utils {
                 (b[0] & 0xFF) << 24;
     }
 
+    // &运算  0xFF
     public static int byteArrayToInt(byte[] buffer , int offset) {
         byte[] b = new byte[4];
         b[0] = buffer[offset];

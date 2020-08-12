@@ -49,7 +49,12 @@ public class SerialPortManager {
         try {
             File device = new File(devicePath);
             int baurate = Integer.parseInt(baudrateString);
-            mSerialPort = new SerialPort(device, baurate, 0);
+            SerialPort.setSuPath("/system/xbin/su");
+//            mSerialPort = new SerialPort(device, baurate, 0);
+            mSerialPort = SerialPort
+                    .newBuilder(devicePath, baurate) // 串口地址地址，波特率
+                    .parity(2) // 校验位；0:无校验位(NONE，默认)；1:奇校验位(ODD);2:偶校验位(EVEN)
+                    .build();
             mReadThread = new SerialReadThread(mSerialPort.getInputStream(),mOnGetDataListener);
             mReadThread.start();
             mOutputStream = mSerialPort.getOutputStream();

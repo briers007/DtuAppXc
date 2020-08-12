@@ -18,7 +18,6 @@
 //import android.widget.RadioButton;
 //import android.widget.RadioGroup;
 //import android.widget.Toast;
-//
 //import com.j256.ormlite.android.apptools.OpenHelperManager;
 //import com.minorfish.dtuapp.R;
 //import com.minorfish.dtuapp.abs.Api;
@@ -57,9 +56,9 @@
 //import com.tangjd.common.utils.FileKit;
 //import com.tangjd.common.utils.StringKit;
 //import com.umeng.analytics.MobclickAgent;
-//
 //import java.io.ByteArrayOutputStream;
 //import java.util.ArrayList;
+//import java.util.Arrays;
 //import java.util.HashMap;
 //import java.util.List;
 //import java.util.Map;
@@ -71,8 +70,9 @@
 // * Author: 485串口版（多个监测站支持）重庆远感机器，泳池水四参
 // * Date: 2018/7/11
 // */
-//public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
+//class ActFrame2 extends BaseActivity implements OnDatabaseListener {
 //
+//    private static final String TAG = "ActFrame2";
 //    @Bind(R.id.fragment_container)
 //    FrameLayout fragmentContainer;
 //    @Bind(R.id.rb_real_data)
@@ -134,7 +134,6 @@
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.act_frame_layout);
 //        ButterKnife.bind(this);
-//        //SPManager.getInstance().putString(Constants.PREF_KEY_SENSOR_SETTING_LIST, "");
 //
 //        mIOThread = new HandlerThread("IOThread");
 //        mIOThread.start();
@@ -381,20 +380,22 @@
 //    private HashMap<DeviceMonitorEnum, TriggerBean> data;
 //    private HashMap<DeviceMonitorEnum, TriggerBean> dataUrea;
 //
+//    /*四参命令监听*/
 //    private OnGetSinglePacketListener mListener = new OnGetSinglePacketListener() {
 //        @Override
 //        public synchronized void onGetSinglePacket(final byte[] singlePacket) {
-//            float zhuoduInt = Utils.byteArrayToInt(singlePacket,3);
-//            float yulvInt = Utils.byteArrayToInt(singlePacket,7);
-//            float temperatureInt = Utils.byteArrayToInt(singlePacket,11);
-//            float phInt = Utils.byteArrayToInt(singlePacket,15);
-//            float condInt = Utils.byteArrayToInt(singlePacket,19);
+//            Log.i(TAG, "onGetSinglePacket---mListener: "+ Arrays.toString(singlePacket));
+//            float zhuoduInt = Utils.byteArrayToInt(singlePacket,3);//浊度
+//            float yulvInt = Utils.byteArrayToInt(singlePacket,7);//余氯
+//            float temperatureInt = Utils.byteArrayToInt(singlePacket,11);//温度
+//            float phInt = Utils.byteArrayToInt(singlePacket,15);//ph 值
+////            float condInt = Utils.byteArrayToInt(singlePacket,19);
 //
 //            final float zhuodu = zhuoduInt/1000f;
 //            final float yulv =  yulvInt/1000f;
 //            final float temperature =  temperatureInt/1000f;
 //            final float ph =  phInt/1000f;
-//            final float cond =  condInt/1000f;
+////            final float cond =  condInt/1000f;
 //
 //            mIOHandler.post(new Runnable() {
 //                @Override
@@ -422,14 +423,14 @@
 //                    TriggerBean yulvBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_CL, yulv);
 //                    TriggerBean temperatureBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_TEMPERATURE, temperature);
 //                    TriggerBean zhuoduBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_TURB, zhuodu);
-//                    TriggerBean condBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_COND, cond);
+////                    TriggerBean condBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_COND, cond);
 //
 //                    data = new HashMap<DeviceMonitorEnum, TriggerBean>();
 //                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_PH, phBean);
 //                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_CL, yulvBean);
 //                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_TEMPERATURE, temperatureBean);
 //                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_TURB, zhuoduBean);
-//                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_COND, condBean);
+////                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_COND, condBean);
 //                    try {
 //                        ((FmtRealDataMulti) mFragments.get(R.id.rb_real_data)).showData(data,0);
 //                    } catch (Exception e) {
@@ -450,9 +451,9 @@
 //                    bean.yulv = yulvBean.value;
 //                    bean.yulvDeta = yulvBean.deta;
 //                    bean.yulvLevel = yulvBean.level;
-//                    bean.cond = condBean.value;
-//                    bean.condDeta = condBean.deta;
-//                    bean.condLevel = condBean.level;
+////                    bean.cond = condBean.value;
+////                    bean.condDeta = condBean.deta;
+////                    bean.condLevel = condBean.level;
 //                    bean.date = ts;
 //
 //                    try {
@@ -473,15 +474,15 @@
 //                        MultiDataBean.SensorDataBean sensorData4 = new MultiDataBean.SensorDataBean();
 //                        sensorData4.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_TURB.getCode();
 //                        sensorData4.value = zhuodu + "";
-//                        MultiDataBean.SensorDataBean sensorData5 = new MultiDataBean.SensorDataBean();
-//                        sensorData5.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_COND.getCode();
-//                        sensorData5.value = cond + "";
+////                        MultiDataBean.SensorDataBean sensorData5 = new MultiDataBean.SensorDataBean();
+////                        sensorData5.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_COND.getCode();
+////                        sensorData5.value = cond + "";
 //
 //                        dataBean.addSensorData(sensorData);
 //                        dataBean.addSensorData(sensorData2);
 //                        dataBean.addSensorData(sensorData3);
 //                        dataBean.addSensorData(sensorData4);
-//                        dataBean.addSensorData(sensorData5);
+////                        dataBean.addSensorData(sensorData5);
 //
 //                        dataBean.mac = mac;
 //                        dataBean.port = serialPort;
@@ -498,9 +499,11 @@
 //    };
 //
 //
+//    /*尿素命令监听*/
 //    private OnGetSinglePacketListener mListenerUrea = new OnGetSinglePacketListener() {
 //        @Override
 //        public synchronized void onGetSinglePacket(final byte[] singlePacket) {
+//            Log.i(TAG, "onGetSinglePacket---mListenerUrea: "+ Arrays.toString(singlePacket));
 //            final float urea = byte2floatCDAB(singlePacket, 3);
 //            mIOHandler.post(new Runnable() {
 //                @Override
@@ -598,6 +601,7 @@
 //        return Float.intBitsToFloat(l);
 //    }
 //
+//    /*四参数据获取结果*/
 //    private OnGetDataListener mOnGetDataListener = new OnGetDataListener() {
 //        @Override
 //        public void OnGetData485(byte[] buffer) {
@@ -605,6 +609,7 @@
 //        }
 //    };
 //
+//    /*尿素数据监听*/
 //    private OnGetDataListener mOnGetDataListenerUrea = new OnGetDataListener() {
 //        @Override
 //        public void OnGetData485(byte[] buffer) {
@@ -636,6 +641,7 @@
 //        mBaos.write(buffer, correctPacketStartIndex + PACKET_LENGTH, buffer.length - (correctPacketStartIndex + PACKET_LENGTH));
 //    }
 //
+//    //解析尿素数据
 //    private synchronized void parsePacketUrea(byte[] buffer, OnGetSinglePacketListener listener) {
 //        mBaosUrea.write(buffer, 0, buffer.length);
 //        if (mBaosUrea.size() == 0) {
@@ -667,11 +673,18 @@
 //        }
 //    };
 //
+//    //下发命令
 //    private void sendData() {
-//        if(mSerialPortManagerMulti!=null) {
-//            mSerialPortManagerMulti.sendCommand(new byte[]{0x06, 0x03, 0x00,  (byte)0x01, (byte)0x00, 0x0A, (byte) 0x95, (byte) 0xBA});
+//
+//        //下发水质设备命令
+//        if(mSerialPortManagerMulti!=null){
+//            mSerialPortManagerMulti.sendCommand(new byte[]{0x01, 0x03, 0x03, (byte) 0xE8, 0x00, 0x04, (byte) 0xC4, (byte) 0x79});
 //        }
-//        //010300010002   CB95
+//
+//        /*if(mSerialPortManagerMulti!=null) {
+//            mSerialPortManagerMulti.sendCommand(new byte[]{0x06, 0x03, 0x00,  (byte)0x01, (byte)0x00, 0x0A, (byte) 0x95, (byte) 0xBA});
+//        }*/
+//        //010300010002   CB95  低位在前高位在后
 //        if(mSerialPortManagerMultiUrea!=null){
 //            mSerialPortManagerMultiUrea.sendCommand(new byte[]{0x01, 0x03, 0x00, 0x01, 0x00, 0x02, (byte) 0x95, (byte) 0xCB});
 //        }
@@ -716,7 +729,7 @@
 //                SensorSettingBean bean = mSensorSettingList.get(i);
 //                if(bean.mEstimateType!=null) {
 //                    if (DeviceMonitorEnum.MONITOR_WATER_SWIM.getCode().equals(bean.mEstimateType.code)) { //水质
-//                        if (bean.mSubTypeBeans != null && bean.mSubTypeBeans.size() == 1) { //尿素
+//                        if (bean.mSubTypeBeans != null && bean.mSubTypeBeans.size() == 1) { //尿素 Urea
 //                            Device mDevice = new Device(bean.mSerialPort, "9600");
 //                            mSerialPortManagerMultiUrea = new SerialPortManagerMulti();
 //                            openOrSwitchPort(mDevice, 1);

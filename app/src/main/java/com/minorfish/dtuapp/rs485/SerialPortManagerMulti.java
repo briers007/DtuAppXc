@@ -13,7 +13,7 @@ import java.util.HashMap;
  * 传感器串口管理类（多串口）
  */
 public class SerialPortManagerMulti {
-    private static final String TAG = "SerialPortManager";
+    private static final String TAG = "SerialPortManagerMulti";
     private SerialReadThread mReadThread;
     private OutputStream mOutputStream;
     private HandlerThread mWriteThread;
@@ -39,7 +39,12 @@ public class SerialPortManagerMulti {
         try {
             File device = new File(devicePath);
             int baurate = Integer.parseInt(baudrateString);
-            mSerialPort = new SerialPort(device, baurate, 0);
+            SerialPort.setSuPath("/system/xbin/su");
+//            mSerialPort = new SerialPort(device, baurate, 0);
+            mSerialPort = SerialPort
+                    .newBuilder(devicePath, baurate) // 串口地址地址，波特率
+                    .parity(2) // 校验位；0:无校验位(NONE，默认)；1:奇校验位(ODD);2:偶校验位(EVEN)
+                    .build();
             mReadThread = new SerialReadThread(mSerialPort.getInputStream(),mOnGetDataListener);
             mReadThread.start();
             mOutputStream = mSerialPort.getOutputStream();
@@ -75,7 +80,7 @@ public class SerialPortManagerMulti {
 
     public void sendCommand(byte[] bytes) {
         try {
-            Log.e("TTTTTT", ByteUtil.bytes2HexStr(bytes));
+            Log.e(TAG, ByteUtil.bytes2HexStr(bytes));
             mOutputStream.write(bytes);
         } catch (IOException e) {
             e.printStackTrace();

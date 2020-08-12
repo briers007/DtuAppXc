@@ -7,6 +7,8 @@ import android.util.Log;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+
 /**
  * 传感器串口读取数据线程控制类
  */
@@ -15,8 +17,8 @@ public class SerialReadThread extends Thread {
     private BufferedInputStream mInputStream;
     private OnGetDataListener mListener;
 
-    public SerialReadThread(InputStream is , OnGetDataListener mListener) {
-        this.mListener= mListener;
+    public SerialReadThread(InputStream is, OnGetDataListener mListener) {
+        this.mListener = mListener;
         mInputStream = new BufferedInputStream(is);
     }
 
@@ -47,10 +49,9 @@ public class SerialReadThread extends Thread {
     }
 
     private void onDataReceive(byte[] received, int size) {
-//        String hexStr = ByteUtil.bytes2HexStr(received, 0, size);
-//        Log.e("TTTTTT", hexStr);
-        if(mListener !=null ) {
+        if (mListener != null) {
             mListener.OnGetData485(com.tangjd.common.utils.ByteUtil.subByteArr(received, 0, size));
+//            mListener.getDataString(strs,com.tangjd.common.utils.ByteUtil.subByteArr(received, 0, size));
         }
     }
 

@@ -604,6 +604,12 @@ public class ActFrame2guohong extends BaseActivity implements OnDatabaseListener
         public void OnGetData485(byte[] buffer) {
             parsePacket(buffer, mListener);
         }
+
+        @Override
+        public void getDataString(String[] strData, byte[] singlePacket) {
+
+        }
+
     };
 
     private OnGetDataListener mOnGetDataListenerUrea = new OnGetDataListener() {
@@ -611,6 +617,12 @@ public class ActFrame2guohong extends BaseActivity implements OnDatabaseListener
         public void OnGetData485(byte[] buffer) {
             parsePacketUrea(buffer, mListenerUrea);
         }
+
+        @Override
+        public void getDataString(String[] strData, byte[] singlePacket) {
+
+        }
+
     };
 
     private synchronized void parsePacket(byte[] buffer, OnGetSinglePacketListener listener) {

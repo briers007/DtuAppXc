@@ -67,7 +67,7 @@
 //import butterknife.ButterKnife;
 //
 ///**
-// * Author: 485串口版（多个监测站支持）相城饮用水 昆山国宏仪器四参和cod
+// * Author: 485串口版（多个监测站支持）相城饮用水 昆山国宏仪器四参和cod(耗氧量)
 // * Date: 2018/7/11
 // */
 //public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
@@ -719,7 +719,7 @@
 //                SensorSettingBean bean = mSensorSettingList.get(i);
 //                if(bean.mEstimateType!=null) {
 //                    if (DeviceMonitorEnum.MONITOR_WATER_DRINK.getCode().equals(bean.mEstimateType.code)) { //水质
-//                        if (bean.mSubTypeBeans != null && bean.mSubTypeBeans.size() == 1) { //cod
+//                        if (bean.mSubTypeBeans != null && bean.mSubTypeBeans.size() == 1) { //cod  耗氧量
 //                            Device mDevice = new Device(bean.mSerialPort, "9600");
 //                            mSerialPortManagerMultiCod = new SerialPortManagerMulti();
 //                            openOrSwitchPort(mDevice, 1);

@@ -15,4 +15,5 @@ public class Constants {
     public static final String ACTION_MQTT_RESTART = "ACTION_MQTT_RESTART";
 
     public static final String UMENG_KEY = "5b73f7a08f4a9d5a0f00012c";
+    public static final String BAUDRATE="9600";
 }

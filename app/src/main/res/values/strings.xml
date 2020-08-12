@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DTUApp</string>
+    <string name="app_name">相城水质监测DTU</string>
 
     <string name="text_login">登录</string>
     <string name="hint_username">请输入您的用户名</string>

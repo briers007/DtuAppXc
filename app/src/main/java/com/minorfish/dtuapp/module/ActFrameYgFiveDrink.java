@@ -613,6 +613,12 @@ public class ActFrameYgFiveDrink extends BaseActivity implements OnDatabaseListe
         public void OnGetData485(byte[] buffer) {
             parsePacket(buffer, mListener);
         }
+
+        @Override
+        public void getDataString(String[] strData, byte[] singlePacket) {
+
+        }
+
     };
 
     private OnGetDataListener mOnGetDataListenerCod = new OnGetDataListener() {
@@ -620,6 +626,12 @@ public class ActFrameYgFiveDrink extends BaseActivity implements OnDatabaseListe
         public void OnGetData485(byte[] buffer) {
             parsePacketCod(buffer, mListenerCod);
         }
+
+        @Override
+        public void getDataString(String[] strData, byte[] singlePacket) {
+
+        }
+
     };
 
     private synchronized void parsePacket(byte[] buffer, OnGetSinglePacketListener listener) {

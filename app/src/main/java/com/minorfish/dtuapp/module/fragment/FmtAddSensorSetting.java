@@ -38,6 +38,9 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+/**
+ * 监测站配置
+ */
 
 
 public class FmtAddSensorSetting extends BaseFragment {
@@ -69,6 +72,7 @@ public class FmtAddSensorSetting extends BaseFragment {
     List<Integer> mSelectSubTypes = new ArrayList<>();
 
     public List<String> mDeviceList;
+
 
     @Override
     protected View setContentView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -250,7 +254,9 @@ public class FmtAddSensorSetting extends BaseFragment {
                                 HashMap<String, String> map = null;
                                 try {
                                     map = (HashMap<String, String>) FileKit.getObject(mActivity, Constants.FILE_KEY_SENSOR_DIC);
-                                }catch (Exception e){}
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 if(map == null){
                                     map = new HashMap<>();
                                 }

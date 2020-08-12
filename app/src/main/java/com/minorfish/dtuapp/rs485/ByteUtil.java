@@ -18,7 +18,7 @@ public class ByteUtil {
         return Float.intBitsToFloat(l);
     }
 
-
+    //将byte数组转化成hex字符串
     public static String bytes2HexStr(byte[] src) {
         StringBuilder builder = new StringBuilder();
         if (src == null || src.length <= 0) {
@@ -38,6 +38,15 @@ public class ByteUtil {
         System.arraycopy(src, dec, temp, 0, length);
         return bytes2HexStr(temp);
     }
+
+
+    public static byte[] subBytes(byte[] src, int begin, int count) {
+        byte[] bs = new byte[count];
+        System.arraycopy(src, begin, bs, 0, count);
+        return bs;
+    }
+
+
 
     public static int byteToInt(byte b) {
         //Java 总是把 byte 当做有符处理；我们可以通过将其和 0xFF 进行二进制与得到它的无符值

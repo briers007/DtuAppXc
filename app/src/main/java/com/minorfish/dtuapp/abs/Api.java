@@ -21,9 +21,9 @@ import retrofit2.http.POST;
 
 public class Api {
     public static final String TAG = "Api";
-    //private static final String DOMAIN_NAME = "http://192.168.2.227:8081";
-    //private static final String DOMAIN_NAME = "http://192.168.2.227:20001";
+//    private static final String DOMAIN_NAME = "http://180.117.162.14:6531";
     private static final String DOMAIN_NAME = "http://js-iot.minorfish.com";
+
     private static ApiService sApiService;
 
     private static String getToken() {

@@ -96,7 +96,7 @@
 //    public List<SensorSettingBean> mSensorSettingList;
 //    public String port1 = "";
 //    public String port2 = "";
-//    public currentUreaCod = 0;
+//    public int currentUreaCod = 0;
 //
 //    private Handler mIOHandler;
 //    private HandlerThread mIOThread;
@@ -676,7 +676,7 @@
 //    };
 //
 //    private void sendData() {
-//        //C7F5
+//        //C7F5  0x01, 0x04, 0x00,  (byte)0x00, (byte)0x00, 0x02, (byte) 0x71, (byte) 0xCB
 //        //SerialPortManager.instance().sendCommand(new byte[]{0x01, 0x03, 0x00, 0x10, 0x00, 0x10, 0x45, (byte) 0xC3});
 //        if(mSerialPortManagerMulti!=null) {
 //            mSerialPortManagerMulti.sendCommand(new byte[]{0x01, 0x03, 0x00, 0x07, 0x00, 0x19, (byte) 0x35, (byte) 0xC1});

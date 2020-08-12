@@ -42,6 +42,7 @@ import com.minorfish.dtuapp.module.dicts.MonitorDicParameter;
 import com.minorfish.dtuapp.module.fragment.FmtAddSensorSetting;
 import com.minorfish.dtuapp.module.fragment.FmtDTUSetting;
 import com.minorfish.dtuapp.module.fragment.FmtHistoryFangshe;
+import com.minorfish.dtuapp.module.fragment.FmtHistoryYuanganFive;
 import com.minorfish.dtuapp.module.fragment.FmtLog;
 import com.minorfish.dtuapp.module.fragment.FmtModifyPwd;
 import com.minorfish.dtuapp.module.fragment.FmtRealDataMulti;
@@ -50,8 +51,10 @@ import com.minorfish.dtuapp.module.model.DtuOnlineDataBean;
 import com.minorfish.dtuapp.module.model.FangsheHistoryBean;
 import com.minorfish.dtuapp.module.model.LogDataBean;
 import com.minorfish.dtuapp.module.model.MultiDataBean;
+import com.minorfish.dtuapp.module.model.RealDataHistoryBean;
 import com.minorfish.dtuapp.module.model.SensorSettingBean;
 import com.minorfish.dtuapp.module.model.TriggerBean;
+import com.minorfish.dtuapp.module.model.UreaDataHistoryBean;
 import com.minorfish.dtuapp.module.model.WorkStationOnlineDataBean;
 import com.minorfish.dtuapp.mqtt.MqttPushDataService;
 import com.minorfish.dtuapp.rs485.Device;
@@ -71,7 +74,9 @@ import com.umeng.analytics.MobclickAgent;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,12 +86,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Author: 485串口版  放射双参
- * Date: 2018/7/11
+ * Author: 485串口版  相城泳池水三参（温度，余氯，PH）
  */
 public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
 
-    private static final String TAG = ActFrame2.class.getSimpleName();
+    private static final String TAG = "ActFrame2";
     @Bind(R.id.fragment_container)
     FrameLayout fragmentContainer;
     @Bind(R.id.rb_real_data)
@@ -103,17 +107,15 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
     RadioButton rbModifyPwd;
     @Bind(R.id.radio_group)
     RadioGroup radioGroup;
-    @Bind(R.id.text_version)
-    TextView textVersion;
 
     private FragmentManager fm;
+    public int currentUreaCod = 0;
 
     public String[] mDevices;
     public List<String> mDeviceList;
     public List<SensorSettingBean> mSensorSettingList;
     public String port1 = "";
     public String port2 = "";
-    public int currentUreaCod = 0;
 
     private Handler mIOHandler;
     private HandlerThread mIOThread;
@@ -125,10 +127,6 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
 
     private DatabaseHelper databaseHelper;
 
-    /**
-     * 实例化一个databaehelper
-     */
-
     private DatabaseHelper getHelper() {
         if (databaseHelper == null) {
             databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
@@ -137,24 +135,12 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
     }
 
     private MqttPushDataService mqttPushDataService;
-
-
-    /**
-     * 创建一个service 服务连接实例
-     */
-
     private final ServiceConnection mqttConnection = new ServiceConnection() {
-        /**
-         * 系统调用onServiceConnected这个来传送在service的onBind()中返回的IBinder．
-         */
         @Override
         public void onServiceConnected(ComponentName arg0, IBinder arg1) {
             mqttPushDataService = ((MqttPushDataService.MqttBinder) arg1).getService();
         }
 
-        /**
-         * Android系统在同service的连接意外丢失时调用这个．比如当service崩溃了或被强杀了．当客户端解除绑定时，这个方法不会被调用．
-         */
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
             mqttPushDataService = null;
@@ -166,9 +152,7 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_frame_layout);
         ButterKnife.bind(this);
-        //SPManager.getInstance().putString(Constants.PREF_KEY_SENSOR_SETTING_LIST, "");
 
-        //实例化ThreadHandler 对象
         mIOThread = new HandlerThread("IOThread");
         mIOThread.start();
         mIOHandler = new Handler(mIOThread.getLooper());
@@ -178,24 +162,23 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        if (App.getApp().getDtuSetting() != null) {
+        if (App.getApp().getDtuSetting() != null) {//已配置直接获取数据
             FmtRealDataMulti fmt = new FmtRealDataMulti();
             mFragments.put(R.id.rb_real_data, fmt);
             ft.replace(R.id.fragment_container, fmt, FmtRealDataMulti.class.getName());
             ft.commit();
             dicMap = (HashMap<String, List<MonitorDicParameter.WarnLinesBean>>) FileKit.getObject(ActFrame2.this, Constants.FILE_KEY_MONITOR_DIC);
-            if (dicMap == null || dicMap.size() == 0) {
-                getMonitorDicParameters();
-            }
-        } else { //没配置dtu（数采仪）先引导去配置
-            FmtRealDataMulti fmt2 = new FmtRealDataMulti();
-            mFragments.put(R.id.rb_real_data, fmt2);
+            //if (dicMap == null || dicMap.size() == 0) {
+            getMonitorDicParameters();
+            //}
 
+        } else { //没配置dtu先引导去配置
             FmtDTUSetting fmt = new FmtDTUSetting();
             mFragments.put(R.id.rb_dtu_setting, fmt);
             ft.replace(R.id.fragment_container, fmt, FmtDTUSetting.class.getName());
             ft.commit();
             radioGroup.check(R.id.rb_dtu_setting);
+            getMonitorDicParameters();
         }
 
         mSensorSettingList = App.getApp().getSensorSettingList();
@@ -222,16 +205,11 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
                             fmt = new FmtRealDataMulti();
                             ft.add(R.id.fragment_container, fmt, FmtRealDataMulti.class.getName());
                         }
-//                        try {
-//                            ((FmtRealDataMulti) mFragments.get(R.id.rb_real_data)).showData(data);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
                         break;
                     case R.id.rb_history:
                         if (needAdd) {
-                            fmt = new FmtHistoryFangshe();
-                            ft.add(R.id.fragment_container, fmt, FmtHistoryFangshe.class.getName());
+                            fmt = new FmtHistoryYuanganFive();
+                            ft.add(R.id.fragment_container, fmt, FmtHistoryYuanganFive.class.getName());
                         }
                         break;
                     case R.id.rb_dtu_setting:
@@ -272,18 +250,7 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
             connectMqtt();
         }
         registerReceiver(mMqttReconnectReceiver, getReceiverFilter());
-
-        if(PreferenceKit.getBoolean(ActFrame2.this,Constants.FILE_KEY_UPDATE)){
-            textVersion.setText("软件版本：v1.1");
-        }
     }
-
-    /**
-     * 应用组件(客户端)可以调用bindService()绑定到一个service．Android系统之后调用service的onBind()方法，它返回一个用来与service交互的IBinder．
-     * 绑定是异步的．bindService()会立即返回，它不会返回IBinder给客户端．要接收IBinder，客户端必须创建一个ServiceConnection的实例并传给bindService()．
-     * ServiceConnection包含一个回调方法，系统调用这个方法来传递要返回的IBinder．
-     * 注：只有activities,services,和contentproviders可以绑定到一个service—你不能从一个broadcastreceiver绑定到service．
-     */
 
     public void connectMqtt() {
         String subscribeTopic = "monitor_multi_data";
@@ -324,26 +291,18 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
             }catch (Exception e){}
             try {
                 //添加成功后打开串口
-                //openOrSwitchPort();
                 mSensorSettingList = App.getApp().getSensorSettingList();
                 ((FmtSensorSettingNew) mFragments.get(R.id.rb_sensor_setting)).setData(true);
                 if (mSensorSettingList != null && mSensorSettingList.size()!=0) { //已配置工作站
                     SensorSettingBean bean = mSensorSettingList.get(index);
                     if(bean.mEstimateType!=null) {
-                        if (DeviceMonitorEnum.MONITOR_RAY.getCode().equals(bean.mEstimateType.code)) { //放射
-                            if(index == 0) {
-                                Device mDevice = new Device(bean.mSerialPort, "9600");
-                                mSerialPortManagerMulti = new SerialPortManagerMulti();
-                                openOrSwitchPort(mDevice,0);
-                                port1 = bean.mSerialPort;
-                                tabName1 = bean.mSensorName;
-                            }else{
-                                Device mDevice = new Device(bean.mSerialPort, "9600");
-                                mSerialPortManagerMulti2 = new SerialPortManagerMulti();
-                                openOrSwitchPort(mDevice,1);
-                                port2 = bean.mSerialPort;
-                                tabName2 = bean.mSensorName;
-                            }
+                        if (DeviceMonitorEnum.MONITOR_WATER_SWIM.getCode().equals(bean.mEstimateType.code)) { //泳池水
+                            Device mDevice = new Device(bean.mSerialPort, "9600");
+                            mSerialPortManagerMulti = new SerialPortManagerMulti();
+                            openOrSwitchPort(mDevice, 0);
+                            port1 = bean.mSerialPort;
+                            tabName1 = bean.mSensorName;
+                            ((FmtRealDataMulti) mFragments.get(R.id.rb_real_data)).setRadio(bean.mSensorName, 0);
                         }
                     }
                 }
@@ -362,28 +321,23 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
                 databaseHelper = null;
             }
             //释放资源
-            mIOThread.quit();//终止looper中的死循环操作，不在接受新的事件加入消息队列
+            mIOThread.quit();
+            unregisterReceiver(mMqttReconnectReceiver);
             unbindService(mqttConnection);
             //SerialPortManagerMulti.instance().close();
             if(mSerialPortManagerMulti!=null){
                 mSerialPortManagerMulti.close();
                 mSerialPortManagerMulti = null;
             }
-            if(mSerialPortManagerMulti2!=null){
-                mSerialPortManagerMulti2.close();
-                mSerialPortManagerMulti2 = null;
-            }
+
             //MqttPushDataService.actionStop(this);
 
-            unregisterReceiver(mMqttReconnectReceiver);
         }catch (Exception e){}
     }
 
     public static IntentFilter getReceiverFilter() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.ACTION_MQTT_FAIL);
-        filter.addAction(Constants.ACTION_MQTT_CHANGE);
-        filter.addAction(Constants.ACTION_MQTT_RESTART);
         return filter;
     }
 
@@ -391,7 +345,6 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Constants.ACTION_MQTT_FAIL)) {
-
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -399,88 +352,43 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
                         mqttPushDataService.scheduleReconnectFromAct();
                     }
                 }, 2*60*60*1000);//两小时后再尝试连接mqtt服务器
-            } else if (Constants.ACTION_MQTT_CHANGE.equals(intent.getAction())){
-                try {
-                    PreferenceKit.putBoolean(ActFrame2.this,Constants.FILE_KEY_UPDATE,true);
-                    showProgressDialog("更新中");
-                    Thread t = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(5000);//让他显示10秒后，取消ProgressDialog
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            dismissProgressDialog();
-                            showToast("更新成功");
-                            ActFrame2.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    textVersion.setText("软件版本：v1.1");
-                                }
-                            });
-                        }
-                    });
-                    t.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else if (Constants.ACTION_MQTT_RESTART.equals(intent.getAction())){
-                try {
-                    final Dialog dialog = new Dialog(ActFrame2.this, R.style.Dialog_Nor);
-                    //设置是否允许Dialog可以被点击取消,也会阻止Back键
-                    dialog.setCancelable(false);
-                    //获取Dialog窗体的根容器
-                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    ViewGroup root = (ViewGroup) dialog.getWindow().getDecorView().findViewById(android.R.id.content);
-                    //设置窗口大小为屏幕大小
-                    WindowManager wm = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-                    Point screenSize = new Point();
-                    wm.getDefaultDisplay().getSize(screenSize);
-                    root.setLayoutParams(new LinearLayout.LayoutParams(screenSize.x, screenSize.y));
-                    //获取自定义布局,并设置给Dialog
-                    View view = inflater.inflate(R.layout.dialog_layout, root, false);
-                    dialog.setContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                    dialog.show();
-                    Thread t = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(5000);//让他显示10秒后，取消ProgressDialog
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            dialog.dismiss();
-                            showToast("重启成功");
-                        }
-                    });
-                    t.start();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         }
     };
 
-    //原來是 3 + 20 +2
-    private static final int PACKET_LENGTH = 9;
-    private volatile ByteArrayOutputStream mBaos = new ByteArrayOutputStream();
-    private volatile ByteArrayOutputStream mBaos2 = new ByteArrayOutputStream();
 
-    private SerialPortManagerMulti mSerialPortManagerMulti = null;
-    private SerialPortManagerMulti mSerialPortManagerMulti2 = null;
+    private static final int PACKET_LENGTH = 13;
+    private volatile ByteArrayOutputStream mBaos = new ByteArrayOutputStream();
+    private SerialPortManagerMulti mSerialPortManagerMulti = null; //三参（余氯，温度，ph）
 
     interface OnGetSinglePacketListener {
         void onGetSinglePacket(byte[] singlePacket);
+        void onGetSingleData(String[] strData,byte[] singlePacket);
     }
 
     private HashMap<DeviceMonitorEnum, TriggerBean> data;
+
+    /*三参命令监听并解析*/
     private OnGetSinglePacketListener mListener = new OnGetSinglePacketListener() {
         @Override
         public synchronized void onGetSinglePacket(final byte[] singlePacket) {
+            Log.i(TAG, "onGetSinglePacket---mListener: "+ Arrays.toString(singlePacket));
 
-            //long fangsheLong = byte2floatCDAB(singlePacket,3);
-            final float fangshe = byte2floatCDAB(singlePacket,3);
+            //ph
+            final int resultPh=Utils.byte2Int(singlePacket,3);
+            final float ph0=(float) resultPh/100f;
+            Log.i(TAG, "onGetSinglePacket--int数值: "+resultPh+"--打印--："+ph0);
+
+            //cl
+            final int resultCl=Utils.byte2Int(singlePacket,5);
+            final float cl0=(float) resultCl/100f;
+            Log.i(TAG, "onGetSinglePacket--int数值: "+resultCl+"--打印--："+cl0);
+
+            //temperature
+            final int resultTemp=Utils.byte2Int(singlePacket,9);
+            final float tem0=(float) resultTemp/10f;
+            Log.i(TAG, "onGetSinglePacket--int数值: "+resultTemp+"--打印--："+tem0);
+
 
             mIOHandler.post(new Runnable() {
                 @Override
@@ -504,11 +412,18 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
                     } catch (Exception e) {
                     }
 
-                    TriggerBean fangsheBean = handleData(DeviceMonitorEnum.MONITOR_RAY_TOGETHER, fangshe);
+                    TriggerBean phBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_PH, ph0);
+                    TriggerBean yulvBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_CL, cl0);
+                    TriggerBean temperatureBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_TEMPERATURE, tem0);
+//                    TriggerBean zhuoduBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_TURB, zhuodu);
+//                    TriggerBean condBean = handleData(DeviceMonitorEnum.MONITOR_WATER_SWIM_COND, cond);
 
                     data = new HashMap<DeviceMonitorEnum, TriggerBean>();
-                    data.put(DeviceMonitorEnum.MONITOR_RAY_TOGETHER, fangsheBean);
-
+                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_PH, phBean);
+                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_CL, yulvBean);
+                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_TEMPERATURE, temperatureBean);
+//                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_TURB, zhuoduBean);
+//                    data.put(DeviceMonitorEnum.MONITOR_WATER_SWIM_COND, condBean);
                     try {
                         ((FmtRealDataMulti) mFragments.get(R.id.rb_real_data)).showData(data,0);
                     } catch (Exception e) {
@@ -516,22 +431,52 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
                     }
 
                     // upload and save
-                    FangsheHistoryBean bean = new FangsheHistoryBean();
-                    bean.sensorName = tabName1;
-                    bean.value = fangsheBean.value;
-                    bean.valueDeta = fangsheBean.deta;
-                    bean.valueLevel = fangsheBean.level;
+                    RealDataHistoryBean bean = new RealDataHistoryBean();
+                   /* bean.zhuodu = zhuoduBean.value;
+                    bean.zhuoduDeta = zhuoduBean.deta;
+                    bean.zhuoduLevel = zhuoduBean.level;*/
+                    bean.ph = phBean.value;
+                    bean.phDeta = phBean.deta;
+                    bean.phLevel = phBean.level;
+                    bean.temperature = temperatureBean.value;
+                    bean.temperatureDeta = temperatureBean.deta;
+                    bean.temperatureLevel = temperatureBean.level;
+                    bean.yulv = yulvBean.value;
+                    bean.yulvDeta = yulvBean.deta;
+                    bean.yulvLevel = yulvBean.level;
+//                    bean.cond = condBean.value;
+//                    bean.condDeta = condBean.deta;
+//                    bean.condLevel = condBean.level;
                     bean.date = ts;
+
                     try {
-                        getHelper().getFangsheDataHistoryDao().createOrUpdate(bean);
+                        getHelper().getRealDataHistoryDao().createOrUpdate(bean);
                     } catch (Exception e) {
                     }
                     try {
                         MultiDataBean dataBean = new MultiDataBean();
                         MultiDataBean.SensorDataBean sensorData = new MultiDataBean.SensorDataBean();
-                        sensorData.code = DeviceMonitorEnum.MONITOR_RAY_TOGETHER.getCode();
-                        sensorData.value = fangshe + "";
+                        sensorData.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_PH.getCode();
+                        sensorData.value = ph0 + "";
+                        MultiDataBean.SensorDataBean sensorData2 = new MultiDataBean.SensorDataBean();
+                        sensorData2.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_TEMPERATURE.getCode();
+                        sensorData2.value = tem0 + "";
+                        MultiDataBean.SensorDataBean sensorData3 = new MultiDataBean.SensorDataBean();
+                        sensorData3.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_CL.getCode();
+                        sensorData3.value = cl0 + "";
+//                        MultiDataBean.SensorDataBean sensorData4 = new MultiDataBean.SensorDataBean();
+//                        sensorData4.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_TURB.getCode();
+//                        sensorData4.value = zhuodu + "";
+//                        MultiDataBean.SensorDataBean sensorData5 = new MultiDataBean.SensorDataBean();
+//                        sensorData5.code = DeviceMonitorEnum.MONITOR_WATER_SWIM_COND.getCode();
+//                        sensorData5.value = cond + "";
+
                         dataBean.addSensorData(sensorData);
+                        dataBean.addSensorData(sensorData2);
+                        dataBean.addSensorData(sensorData3);
+//                        dataBean.addSensorData(sensorData4);
+//                        dataBean.addSensorData(sensorData5);
+
                         dataBean.mac = mac;
                         dataBean.port = serialPort;
                         dataBean.ts = ts;
@@ -544,79 +489,18 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
                 }
             });
         }
-    };
 
-    private OnGetSinglePacketListener mListener2 = new OnGetSinglePacketListener() {
         @Override
-        public synchronized void onGetSinglePacket(final byte[] singlePacket) {
-
-            //long fangsheLong = Utils.byte2Long(singlePacket,3);
-            final float fangshe = byte2floatCDAB(singlePacket,3);
-
-            mIOHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    long ts = System.currentTimeMillis();
-                    String serialPort = port2;
-                    String mac = "";
-                    if (App.getApp().getDtuSetting() != null) {
-                        mac = App.getApp().getDtuSetting().mMac;
-                    }
-                    //心跳，本机和工作台状态
-                    try {
-                        WorkStationOnlineDataBean workStationOnlineDataBean = new WorkStationOnlineDataBean();
-                        workStationOnlineDataBean.mac = mac;
-                        workStationOnlineDataBean.ts = ts;
-                        workStationOnlineDataBean.port = serialPort;
-                        workStationOnlineDataBean.online = "1";
-                        String  workStationStr = workStationOnlineDataBean.toJson();
-
-                        mqttPushDataService.pushData("ws_online_data", workStationStr);
-                    } catch (Exception e) {
-                    }
-
-                    TriggerBean fangsheBean = handleData(DeviceMonitorEnum.MONITOR_RAY_TOGETHER, fangshe);
-
-                    data = new HashMap<DeviceMonitorEnum, TriggerBean>();
-                    data.put(DeviceMonitorEnum.MONITOR_RAY_TOGETHER, fangsheBean);
-
-                    try {
-                        ((FmtRealDataMulti) mFragments.get(R.id.rb_real_data)).showData(data,1);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    // upload and save
-                    FangsheHistoryBean bean = new FangsheHistoryBean();
-                    bean.sensorName = tabName2;
-                    bean.value = fangsheBean.value;
-                    bean.valueDeta = fangsheBean.deta;
-                    bean.valueLevel = fangsheBean.level;
-                    bean.date = ts;
-                    try {
-                        getHelper().getFangsheDataHistoryDao().createOrUpdate(bean);
-                    } catch (Exception e) {
-                    }
-                    try {
-                        MultiDataBean dataBean = new MultiDataBean();
-                        MultiDataBean.SensorDataBean sensorData = new MultiDataBean.SensorDataBean();
-                        sensorData.code = DeviceMonitorEnum.MONITOR_RAY_TOGETHER.getCode();
-                        sensorData.value = fangshe + "";
-                        dataBean.addSensorData(sensorData);
-                        dataBean.mac = mac;
-                        dataBean.port = serialPort;
-                        dataBean.ts = ts;
-                        String message = dataBean.toJson();
-                        if (mqttPushDataService != null) {
-                            mqttPushDataService.pushData("monitor_multi_data", message);
-                        }
-                    } catch (Exception e) {
-                    }
-                }
-            });
+        public void onGetSingleData(String[] strData, byte[] singlePacket) {
+            Log.i(TAG, "onGetSingleData---mListener: "+ Arrays.toString(strData)+"----"+Arrays.toString(singlePacket));
         }
+
     };
 
+    /**
+     * 如 AB AA 40 76 为传输顺序 C D A B,对应的存储顺序 A B C D 为 40 76 AB AA，转换成 float 为 3.854228
+     */
+    //传输顺序
     public static float byte2floatCDAB(byte[] b, int index) {
         int l;
         l = b[index + 1];
@@ -629,19 +513,78 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         return Float.intBitsToFloat(l);
     }
 
+
+    //传输顺序
+    public static float byte2floatABCD(byte[] b, int index) {
+        int l;
+        l = b[index + 1];
+        l &= 0xff;
+        l |= ((long) b[index + 0] << 8);
+        l &= 0xffff;
+        l |= ((long) b[index + 2]);
+        l &= 0xffffff;
+        l |= ((long) b[index + 3]);
+        return Float.intBitsToFloat(l);
+    }
+
+    /**
+     * byte转换为float，低位在前
+     *
+     * @param b     字节（4个字节）
+     * @param index 开始位置
+     * @return
+     */
+
+    public static float byte2floatDCBA(byte[] b, int index) {
+        int l;
+        l = b[index + 0];
+        l &= 0xff;
+        l |= ((long) b[index + 1] << 8);
+        l &= 0xffff;
+        l |= ((long) b[index + 2] << 16);
+        l &= 0xffffff;
+        l |= ((long) b[index + 3] << 24);
+        return Float.intBitsToFloat(l);
+    }
+
+    /*三参数据获取结果*/
     private OnGetDataListener mOnGetDataListener = new OnGetDataListener() {
         @Override
         public void OnGetData485(byte[] buffer) {
+            Log.i(TAG, "OnGetData485: "+Arrays.toString(buffer));
             parsePacket(buffer, mListener);
         }
+
+        @Override
+        public void getDataString(String[] strData, byte[] singlePacket) {
+            Log.i(TAG, "getDataString: "+Arrays.toString(strData)+"--接收数据--"+Arrays.toString(singlePacket));
+            parseData(strData,singlePacket, mListener);
+        }
+
     };
 
-    private OnGetDataListener mOnGetDataListener2 = new OnGetDataListener() {
-        @Override
-        public void OnGetData485(byte[] buffer) {
-            parsePacket2(buffer, mListener2);
+
+    private synchronized void parseData(String[] strData, byte[] buffer, OnGetSinglePacketListener listener) {
+        mBaos.write(buffer, 0, buffer.length);
+        if (mBaos.size() == 0) {
+            return;
         }
-    };
+        buffer = mBaos.toByteArray();
+        int correctPacketStartIndex = 0;
+        for (int i = 0; i < buffer.length - 2; i++) {
+            if (buffer[i] == 0x01 && buffer[i + 1] == 0x03 && buffer[i + 2] == (byte)0x08) {
+                correctPacketStartIndex = i;
+            }
+        }
+
+        if (buffer.length < PACKET_LENGTH + correctPacketStartIndex) {
+            return;
+        }
+//        listener.onGetSinglePacket(ByteUtil.subByteArr(buffer, correctPacketStartIndex, PACKET_LENGTH));
+        listener.onGetSingleData(strData,ByteUtil.subByteArr(buffer, correctPacketStartIndex, PACKET_LENGTH));
+        mBaos.reset();
+        mBaos.write(buffer, correctPacketStartIndex + PACKET_LENGTH, buffer.length - (correctPacketStartIndex + PACKET_LENGTH));
+    }
 
     private synchronized void parsePacket(byte[] buffer, OnGetSinglePacketListener listener) {
         mBaos.write(buffer, 0, buffer.length);
@@ -651,10 +594,11 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         buffer = mBaos.toByteArray();
         int correctPacketStartIndex = 0;
         for (int i = 0; i < buffer.length - 2; i++) {
-            if (buffer[i] == 0x01 && buffer[i + 1] == 0x04 && buffer[i + 2] == (byte)0x04) {
+            if (buffer[i] == 0x01 && buffer[i + 1] == 0x03 && buffer[i + 2] == (byte)0x08) {
                 correctPacketStartIndex = i;
             }
         }
+
         if (buffer.length < PACKET_LENGTH + correctPacketStartIndex) {
             return;
         }
@@ -663,51 +607,29 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         mBaos.write(buffer, correctPacketStartIndex + PACKET_LENGTH, buffer.length - (correctPacketStartIndex + PACKET_LENGTH));
     }
 
-    private synchronized void parsePacket2(byte[] buffer, OnGetSinglePacketListener listener) {
-        mBaos2.write(buffer, 0, buffer.length);
-        if (mBaos2.size() == 0) {
-            return;
-        }
-        buffer = mBaos2.toByteArray();
-        int correctPacketStartIndex = 0;
-        for (int i = 0; i < buffer.length - 2; i++) {
-            if (buffer[i] == 0x01 && buffer[i + 1] == 0x04 && buffer[i + 2] == (byte)0x04) {
-                correctPacketStartIndex = i;
-            }
-        }
-        if (buffer.length < PACKET_LENGTH + correctPacketStartIndex) {
-            return;
-        }
-        listener.onGetSinglePacket(ByteUtil.subByteArr(buffer, correctPacketStartIndex, PACKET_LENGTH));
-        mBaos2.reset();
-        mBaos2.write(buffer, correctPacketStartIndex + PACKET_LENGTH, buffer.length - (correctPacketStartIndex + PACKET_LENGTH));
-    }
 
     private Handler mHandler = new Handler();
     private Runnable getDataRunnable = new Runnable() {
         @Override
         public void run() {
-            Log.e("TTTTTT", "getSanzeData");
+            Log.e(TAG, "getSanzeData");
             sendData();
             mHandler.postDelayed(this, 5 * 60 * 1000);
         }
     };
 
     private void sendData() {
-        //C7F5
-        //SerialPortManager.instance().sendCommand(new byte[]{0x01, 0x03, 0x00, 0x10, 0x00, 0x10, 0x45, (byte) 0xC3});
-        //01 03 00 00 00 02 C4 0B        01 03 00 00 00 02 C4 0B
-        if(mSerialPortManagerMulti!=null) {
-            mSerialPortManagerMulti.sendCommand(new byte[]{0x01, 0x04, 0x00,  (byte)0x00, (byte)0x00, 0x02, (byte) 0x71, (byte) 0xCB});
+        //下发水质设备命令
+        if(mSerialPortManagerMulti!=null){
+            mSerialPortManagerMulti.sendCommand(new byte[]{0x01, 0x03, 0x03, (byte) 0xE8, 0x00, 0x04, (byte) 0xC4, (byte) 0x79});
         }
-        if(mSerialPortManagerMulti2!=null){
-            mSerialPortManagerMulti2.sendCommand(new byte[]{0x01, 0x04, 0x00,  (byte)0x00, (byte)0x00, 0x02, (byte) 0x71, (byte) 0xCB});
-        }
+
         //心跳，本机状态
         try {
             String mac = "";
             if (App.getApp().getDtuSetting() != null) {
                 mac = App.getApp().getDtuSetting().mMac;
+                Log.i(TAG, "sendData: "+mac);
             }
             long ts = System.currentTimeMillis();
             DtuOnlineDataBean dtuOnlineDataBean = new DtuOnlineDataBean();
@@ -715,7 +637,7 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
             dtuOnlineDataBean.ts = ts;
             dtuOnlineDataBean.online = "1";
             String dtuOnlineStr = dtuOnlineDataBean.toJson();
-            com.tangjd.common.utils.Log.e(TAG,"sendData: "+dtuOnlineStr);
+            Log.i(TAG, "sendData: "+dtuOnlineStr);
             mqttPushDataService.pushData("dtu_online_data", dtuOnlineStr);
         } catch (Exception e) {
         }
@@ -734,6 +656,7 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         }
         mDeviceList = transferArrayToList(mDevices);
         mDeviceList.add(0, "未选择");
+        FileKit.save(ActFrame2.this, mDeviceList, Constants.FILE_KEY_485_DEVICE);
         openDevice();
     }
 
@@ -741,26 +664,19 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         if (mSensorSettingList != null && mSensorSettingList.size()!=0) { //已配置工作站
             for(int i=0;i<mSensorSettingList.size();i++){
                 SensorSettingBean bean = mSensorSettingList.get(i);
-                String str=new Gson().toJson(bean);
-                com.tangjd.common.utils.Log.e(TAG,"openDevice: "+str);
                 if(bean.mEstimateType!=null) {
-                    if (DeviceMonitorEnum.MONITOR_RAY.getCode().equals(bean.mEstimateType.code)) {//放射
-                        if(i == 0) {
-                            Device mDevice = new Device(bean.mSerialPort, "9600");
-                            mSerialPortManagerMulti = new SerialPortManagerMulti();
-                            openOrSwitchPort(mDevice,0);
-                            port1 = bean.mSerialPort;
-                            tabName1 = bean.mSensorName;
-                        }else{
-                            Device mDevice = new Device(bean.mSerialPort, "9600");
-                            mSerialPortManagerMulti2 = new SerialPortManagerMulti();
-                            openOrSwitchPort(mDevice,1);
-                            port2 = bean.mSerialPort;
-                            tabName2 = bean.mSensorName;
-                        }
+                    if (DeviceMonitorEnum.MONITOR_WATER_SWIM.getCode().equals(bean.mEstimateType.code)) { //水质
+                        Device mDevice = new Device(bean.mSerialPort, "9600");
+                        mSerialPortManagerMulti = new SerialPortManagerMulti();
+                        openOrSwitchPort(mDevice, 0);
+                        port1 = bean.mSerialPort;
+                        tabName1 = bean.mSensorName;
+                        ((FmtRealDataMulti) mFragments.get(R.id.rb_real_data)).setRadio(bean.mSensorName, 0);
                     }
                 }
             }
+        }else{
+            Log.i(TAG, "openDevice: "+"请先配置工作站");
         }
     }
 
@@ -774,18 +690,12 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
 
     public void openOrSwitchPort(Device mDevice, int type) {
         boolean mOpened = false;
-        if(type == 0){
-            if(mSerialPortManagerMulti == null){
+        if(type == 0) {
+            if (mSerialPortManagerMulti == null) {
                 mSerialPortManagerMulti = new SerialPortManagerMulti();
             }
             mSerialPortManagerMulti.setOnGetDataListener(mOnGetDataListener);
             mOpened = mSerialPortManagerMulti.open(mDevice) != null;
-        }else{
-            if(mSerialPortManagerMulti2 == null){
-                mSerialPortManagerMulti2 = new SerialPortManagerMulti();
-            }
-            mSerialPortManagerMulti2.setOnGetDataListener(mOnGetDataListener2);
-            mOpened = mSerialPortManagerMulti2.open(mDevice) != null;
         }
         if (mOpened) {
             Toast.makeText(this, "成功打开串口", Toast.LENGTH_LONG).show();
@@ -832,13 +742,12 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
         String mac = "78:A3:51:2B:77:14";
         if (App.getApp().getDtuSetting() != null) {
             mac = App.getApp().getDtuSetting().mMac;
+            Log.i(TAG, "getMonitorDicParameters: "+mac);
         }
         Api.getMonitorDicParameters(mac, new OnStringRespListener() {
             @Override
             public void onResponse(String data) {
                 Resp resp = Resp.objectFromData(data);
-                String str=new Gson().toJson(resp);
-                com.tangjd.common.utils.Log.e(TAG,"getMonitorDicParameters-Api.getMonitorDicParameters: "+str);
                 if (resp.canParse()) {
                     List<MonitorDicParameter> list = MonitorDicParameter.arrayMonitorWarnLineParameterFromData(resp.content);
                     if (list != null && list.size() != 0) {
@@ -864,7 +773,6 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
             }
         });
     }
-
 
     //友盟
     @Override
