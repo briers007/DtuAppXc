@@ -1,6 +1,5 @@
 package com.minorfish.dtuapp.module;
 
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -167,7 +166,11 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
             mFragments.put(R.id.rb_real_data, fmt);
             ft.replace(R.id.fragment_container, fmt, FmtRealDataMulti.class.getName());
             ft.commit();
-            dicMap = (HashMap<String, List<MonitorDicParameter.WarnLinesBean>>) FileKit.getObject(ActFrame2.this, Constants.FILE_KEY_MONITOR_DIC);
+            try {
+                dicMap = (HashMap<String, List<MonitorDicParameter.WarnLinesBean>>) FileKit.getObject(ActFrame2.this, Constants.FILE_KEY_MONITOR_DIC);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             //if (dicMap == null || dicMap.size() == 0) {
             getMonitorDicParameters();
             //}
@@ -200,37 +203,37 @@ public class ActFrame2 extends BaseActivity implements OnDatabaseListener {
                     }
                 }catch (Exception e){}
                 switch (checkedId) {
-                    case R.id.rb_real_data:
+                    case R.id.rb_real_data://实时数据
                         if (needAdd) {
                             fmt = new FmtRealDataMulti();
                             ft.add(R.id.fragment_container, fmt, FmtRealDataMulti.class.getName());
                         }
                         break;
-                    case R.id.rb_history:
+                    case R.id.rb_history://历史数据
                         if (needAdd) {
                             fmt = new FmtHistoryYuanganFive();
                             ft.add(R.id.fragment_container, fmt, FmtHistoryYuanganFive.class.getName());
                         }
                         break;
-                    case R.id.rb_dtu_setting:
+                    case R.id.rb_dtu_setting://数采仪配置
                         if (needAdd) {
                             fmt = new FmtDTUSetting();
                             ft.add(R.id.fragment_container, fmt, FmtDTUSetting.class.getName());
                         }
                         break;
-                    case R.id.rb_sensor_setting:
+                    case R.id.rb_sensor_setting://监测站配置
                         if (needAdd) {
                             fmt = new FmtSensorSettingNew();
                             ft.add(R.id.fragment_container, fmt, FmtSensorSettingNew.class.getName());
                         }
                         break;
-                    case R.id.rb_log:
+                    case R.id.rb_log://异常记录
                         if (needAdd) {
                             fmt = new FmtLog();
                             ft.add(R.id.fragment_container, fmt, FmtLog.class.getName());
                         }
                         break;
-                    case R.id.rb_modify_pwd:
+                    case R.id.rb_modify_pwd://修改密码
                         if (needAdd) {
                             fmt = new FmtModifyPwd();
                             ft.add(R.id.fragment_container, fmt, FmtModifyPwd.class.getName());
